@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prismmvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Mvvm.Xamarin"
+             xmlns:local="clr-namespace:XamarinUnityInjection.Views;assembly=XamarinUnityInjection"
+             xmlns:cv="clr-namespace:XamarinUnityInjection.Converters;assembly=XamarinUnityInjection"
+             xmlns:vm="clr-namespace:XamarinUnityInjection.ViewModels;assembly=XamarinUnityInjection"
+             prismmvvm:ViewModelLocator.AutoWireViewModel="true"
+             local:PageStateDetect.DetectState="true"
+             x:Class="XamarinUnityInjection.Views.TopPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <cv:RectangleConverter x:Key="RectangleConverter"/>
+      <cv:ColorConverter x:Key="ColorConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  
+    <AbsoluteLayout HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+      
+      <!-- 目盛り描画 -->
+      <local:AbsoluteItemsControl
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        x:TypeArguments="vm:TickItemViewModel"
+        ItemsSource="{Binding TickItems}">
+        <local:AbsoluteItemsControl.ItemTemplate>
+          <DataTemplate>
+            <BoxView Color="{Binding Color, Converter={StaticResource ColorConverter}}"
+                     AbsoluteLayout.LayoutBounds="{Binding LayoutBounds, Converter={StaticResource RectangleConverter}}"
+                     AbsoluteLayout.LayoutFlags="None"
+                     AnchorX="0.5"
+                     AnchorY="0.5"
+                     Rotation="{Binding Rotation}"/>
+          </DataTemplate>
+        </local:AbsoluteItemsControl.ItemTemplate>
+      </local:AbsoluteItemsControl>
+
+      <!-- 数字描画 -->
+      <local:AbsoluteItemsControl  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+        x:TypeArguments="vm:NumberItemViewModel"
+        ItemsSource="{Binding NumberItems}">
+        <local:AbsoluteItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Label TextColor="{Binding Color, Converter={StaticResource ColorConverter}}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Font="20"
+                   Text="{Binding NumberString}"
+                   AbsoluteLayout.LayoutBounds="{Binding LayoutBounds, Converter={StaticResource RectangleConverter}}"
+                   AbsoluteLayout.LayoutFlags="None"
+                   AnchorX="0.5"
+                   AnchorY="0.5"
+                   Rotation="{Binding Rotation}"/>
+          </DataTemplate>
+        </local:AbsoluteItemsControl.ItemTemplate>
+      </local:AbsoluteItemsControl>
+
+      <!-- 時針描画 -->
+      <BoxView BindingContext="{Binding HourHand}"
+               Color="{Binding Color, Converter={StaticResource ColorConverter}}"
+               Opacity="0.5"
+               AbsoluteLayout.LayoutBounds="{Binding LayoutBounds, Converter={StaticResource RectangleConverter}}"
+               AbsoluteLayout.LayoutFlags="None"
+               AnchorX="0.5"
+               AnchorY="0.5"
+               Rotation="{Binding Rotation}"/>
+      
+      <!-- 分針描画 -->
+      <BoxView BindingContext="{Binding MinuteHand}"
+               Color="{Binding Color, Converter={StaticResource ColorConverter}}"
+               Opacity="0.5"
+               AbsoluteLayout.LayoutBounds="{Binding LayoutBounds, Converter={StaticResource RectangleConverter}}"
+               AbsoluteLayout.LayoutFlags="None"
+               AnchorX="0.5"
+               AnchorY="0.5"
+               Rotation="{Binding Rotation}"/>
+
+      <!-- 秒針描画 -->
+      <BoxView x:Name="Test" BindingContext="{Binding SecondHand}"
+               Color="{Binding Color, Converter={StaticResource ColorConverter}}"
+               Opacity="0.5"
+               AbsoluteLayout.LayoutBounds="{Binding LayoutBounds, Converter={StaticResource RectangleConverter}}"
+               AbsoluteLayout.LayoutFlags="None"
+               AnchorX="0.5"
+               AnchorY="0.5"
+               Rotation="{Binding Rotation}"/>
+    </AbsoluteLayout>
+</ContentPage>
