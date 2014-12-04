@@ -208,7 +208,6 @@ namespace XamarinUnityInjection.ViewModels
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="navigationService">画面遷移サービス（DI コンテナにより自動注入される）</param>
         /// <param name="repository">リポジトリ（DI コンテナにより自動注入される）</param>
         public TopPageViewModel(IPageStateDetectService pageStateDetectService)
         {
