@@ -77,7 +77,7 @@
                Rotation="{Binding Rotation}"/>
 
       <!-- 秒針描画 -->
-      <BoxView x:Name="Test" BindingContext="{Binding SecondHand}"
+      <BoxView BindingContext="{Binding SecondHand}"
                Color="{Binding Color, Converter={StaticResource ColorConverter}}"
                Opacity="0.5"
                AbsoluteLayout.LayoutBounds="{Binding LayoutBounds, Converter={StaticResource RectangleConverter}}"
